@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXChipView?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="companyPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #1f1e1e;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="placement.Controllers.PostController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="57.0" prefWidth="1280.0" style="-fx-background-color: #583bcd;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton alignment="CENTER" prefHeight="100.0" prefWidth="107.0" ripplerFill="BLACK" style="-fx-background-color: #583bcd;" text="Post" textFill="WHITE">
+               <font>
+                  <Font name="Consolas Bold" size="27.0" />
+               </font>
+            </JFXButton>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="33.0" text="|" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+            <JFXButton alignment="CENTER" prefHeight="100.0" prefWidth="223.0" ripplerFill="BLACK" text="Applications" textFill="WHITE">
+               <font>
+                  <Font name="Consolas Bold" size="27.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <AnchorPane prefHeight="662.0" prefWidth="758.0" style="-fx-border-color: grey;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXDatePicker fx:id="deadlineLabel" defaultColor="#583bcd" layoutX="94.0" layoutY="458.0" prefHeight="28.0" prefWidth="158.0" promptText="Application deadline" style="-fx-text-fill: white; -fx-background-color: white; -fx-background-insets: -10px; -fx-prompt-text-fill: white;" />
+            <JFXButton fx:id="postButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="371.0" layoutY="553.0" onMouseClicked="#postJob" prefHeight="48.0" prefWidth="113.0" style="-fx-background-color: #583bcd;" text="Post" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="25.0" />
+               </font>
+            </JFXButton>
+            <Label alignment="CENTER" layoutX="58.0" layoutY="19.0" prefHeight="67.0" prefWidth="218.0" text="Post New Offer" textFill="#583bcd">
+               <font>
+                  <Font name="Consolas" size="25.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="titleLabel" focusColor="#583bcd" layoutX="73.0" layoutY="107.0" prefHeight="30.0" prefWidth="247.0" promptText="Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" text="Job title" unFocusColor="WHITE">
+               <font>
+                  <Font name="Consolas" size="16.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextArea fx:id="descLabel" focusColor="#583bcd" layoutX="75.0" layoutY="173.0" prefHeight="114.0" prefWidth="714.0" promptText="Job Description" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
+               <font>
+                  <Font name="Consolas" size="16.0" />
+               </font>
+            </JFXTextArea>
+            <JFXTextField fx:id="salaryLabel" focusColor="#583bcd" layoutX="83.0" layoutY="337.0" prefHeight="30.0" prefWidth="247.0" promptText="Salary" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
+               <font>
+                  <Font name="Consolas" size="16.0" />
+               </font>
+            </JFXTextField>
+            <JFXComboBox layoutX="576.0" layoutY="439.0" prefHeight="46.0" prefWidth="213.0" />
+            <JFXChipView layoutX="560.0" layoutY="340.0" maxWidth="500.0" minWidth="300.0" prefHeight="78.0" prefWidth="300.0" promptText="Skills" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-font-family: consolas; -fx-font-size: 16;" />
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="663.0" prefWidth="270.0" style="-fx-border-color: grey;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="134.0" layoutY="155.0" />
+            <Label alignment="CENTER" layoutX="36.0" layoutY="88.0" prefHeight="67.0" prefWidth="218.0" text="Company X" textFill="#583bcd">
+               <font>
+                  <Font name="Consolas Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="34.0" layoutY="190.0" prefHeight="30.0" prefWidth="218.0" text="Id : xnx5321" textFill="#afafaf">
+               <font>
+                  <Font name="Consolas" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="logoutButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="84.0" layoutY="362.0" onAction="#logoutCompany" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: #1f1e1e; -fx-border-color: #583bcd;" text="Logout" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="21.0" />
+               </font>
+            </JFXButton>
+         </children></AnchorPane>
+   </left>
+</BorderPane>
