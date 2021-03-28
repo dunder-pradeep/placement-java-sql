@@ -33,44 +33,59 @@ public class LoginController implements Initializable {
     public JFXRadioButton toggleStudent;
     public JFXRadioButton toggleAdmin;
     public JFXRadioButton toggleCompany;
-    public JFXAutoCompletePopup popup;
 
     public void handleSubmit(MouseEvent mouseEvent) throws Exception{
+        JFXRadioButton selectedToggle = (JFXRadioButton) toggleGroup.getSelectedToggle();
         String UserID = userID.getText();
         String PasswordID =  passwordID.getText();
+        int type = selectedToggle==toggleStudent?0:selectedToggle==toggleCompany?1:2;
 
         String SQL;
         ResultSet rs;
 
         Connection connection = Database.connectToDB();
+        assert connection != null;
         Statement statement = connection.createStatement();
 
-        JFXRadioButton selectedToggle = (JFXRadioButton) toggleGroup.getSelectedToggle();
 
-        if(selectedToggle==toggleStudent) {
-            SQL = String.format("SELECT * FROM USER WHERE ID='%s' AND PWD=%s", userID.getText(), passwordID.getText());
-            rs = statement.executeQuery(SQL);
-            if (rs.next()) {
-                App.setAuthUser(true);
-                App.newUser(rs.getInt("id"), rs.getString("name"), "", rs.getString("pwd"), Integer.parseInt(rs.getString("phone")), rs.getString("skills"), rs.getString("email"), rs.getString("applications"));
-                Pane pane = FXMLLoader.load(getClass().getResource("../user_info.fxml"));
-                loginpage.getChildren().setAll(pane);
-                return;
+        SQL = String.format("SELECT * FROM ACCOUNTS WHERE ACCOUNT_ID=%d AND PASSWORD=%s AND TYPE=%d", Integer.parseInt(userID.getText()), passwordID.getText(),type);
+        rs = statement.executeQuery(SQL);
+        if(rs.next()){
+            if(type==0){
+                //student login
+                SQL = String.format("SELECT * FROM STUDENT WHERE ACCOUNT_ID=%d",Integer.parseInt(userID.getText()));
+                rs = statement.executeQuery(SQL);
+                if(rs.next()) {
+                    App.setAuthUser(true);
+                    App.newUser(rs.getInt("student_id"), rs.getString("student_first_name"), rs.getString("student_last_name"), passwordID.getText(), Integer.parseInt(rs.getString("phone")),"", rs.getString("email"), "");
+                    Pane pane = FXMLLoader.load(getClass().getResource("../user_info.fxml"));
+                    loginpage.getChildren().setAll(pane);
+                    return;
+                }
+                else {
+                    System.out.println("login failed");
+                }
             }
-        }
-        if(selectedToggle==toggleCompany) {
-            //verify company..
-            SQL = String.format("SELECT * FROM COMPANY WHERE ID='%s' AND PWD=%s",UserID,PasswordID );
-            rs = statement.executeQuery(SQL);
-            if (rs.next()) {
+            else if (type==1){
+                //company login
+                SQL = String.format("SELECT * FROM COMPANY WHERE ACCOUNT_ID=%d",Integer.parseInt(userID.getText()));
+                rs = statement.executeQuery(SQL);
+                if(rs.next()){
                 App.setAuthCompany(true);
-                App.newCompany(rs.getString("name"), rs.getString("id"),"laterb",rs.getString("jobs"));
+                App.newCompany(rs.getString("company_name"), rs.getString("company_id"),"laterb","");
                 Pane pane = FXMLLoader.load(getClass().getResource("../companyPosts.fxml"));
                 loginpage.getChildren().setAll(pane);
-                return;
+                return;}
+                else {
+                    System.out.println("login failed");
+                }
+            }
+            else {
+                System.out.println("admin not yet created");
             }
         }
 
+        connection.close();
     }
 
     @Override

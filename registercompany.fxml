@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -46,12 +47,12 @@
                         <Font size="16.0" />
                     </font>
                 </JFXTextField>
-                <JFXTextField fx:id="emailLabel" focusColor="#583bcd" layoutX="754.0" layoutY="217.0" promptText="Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" text="Email id" unFocusColor="WHITE">
+                <JFXTextField fx:id="emailLabel" focusColor="#583bcd" layoutX="754.0" layoutY="217.0" promptText="Email id" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </JFXTextField>
-                <JFXTextField fx:id="passwordLabel" focusColor="#583bcd" layoutX="495.0" layoutY="456.0" promptText="Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" text="Password" unFocusColor="WHITE">
+                <JFXTextField fx:id="passwordLabel" focusColor="#583bcd" layoutX="532.0" layoutY="503.0" promptText="Password" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -61,7 +62,7 @@
                         <Font size="19.0" />
                     </font>
                 </JFXButton>
-            <JFXTextArea fx:id="addressLabel" focusColor="#583bcd" layoutX="320.0" layoutY="284.0" prefHeight="113.0" prefWidth="629.0" promptText="HQ Address" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
+            <JFXTextArea fx:id="addressLabel" focusColor="#583bcd" layoutX="325.0" layoutY="298.0" prefHeight="81.0" prefWidth="629.0" promptText="HQ Address" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
                <font>
                   <Font name="Consolas" size="16.0" />
                </font>
@@ -71,7 +72,25 @@
                   <Font size="19.0" />
                </font>
             </JFXButton>
+            <JFXTextField fx:id="phoneLabel" focusColor="#583bcd" layoutX="325.0" layoutY="431.0" promptText="Phone" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="marketLabel" focusColor="#583bcd" layoutX="796.0" layoutY="431.0" promptText="Market Value" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXTextField>
+            <Label fx:id="notificationLabel" alignment="CENTER" layoutX="486.0" layoutY="30.0" opacity="0.0" prefHeight="26.0" prefWidth="272.0" style="-fx-background-color: #583bcd; -fx-border-color: white;" text="Registered user id: 312" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI" size="17.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </left>
+   <right>
+      <JFXDatePicker fx:id="foundingLabel" promptText="Founding year" style="-fx-text-fill: white; -fx-font-color: white;" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>

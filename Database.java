@@ -15,7 +15,7 @@ public class Database {
         String db_userID = "root";
         String db_password = "root";
         String db_url = "jdbc:mysql://localhost:3306/";
-        String db_name = "user";
+        String db_name = "jobportal";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");

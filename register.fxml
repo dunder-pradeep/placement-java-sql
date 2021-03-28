@@ -46,42 +46,46 @@
                   <Font size="16.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="emailLabel" focusColor="#583bcd" layoutX="754.0" layoutY="217.0" promptText="Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" text="Email id" unFocusColor="WHITE">
+            <JFXTextField fx:id="emailLabel" focusColor="#583bcd" layoutX="754.0" layoutY="217.0" promptText="Email id" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="collegeLabel" focusColor="#583bcd" layoutX="324.0" layoutY="288.0" promptText="Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" text="Undergrad college" unFocusColor="WHITE">
+            <JFXTextField fx:id="ageLabel" focusColor="#583bcd" layoutX="324.0" layoutY="288.0" promptText="Age" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="cgpaLabel" focusColor="#583bcd" layoutX="751.0" layoutY="289.0" promptText="Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" text="Undergrad GPA" unFocusColor="WHITE">
+            <JFXTextField fx:id="cgpaLabel" focusColor="#583bcd" layoutX="751.0" layoutY="289.0" promptText="Undergrad GPA" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="cgpa3Label" focusColor="#583bcd" layoutX="753.0" layoutY="367.0" promptText="Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" text="12th GPA" unFocusColor="WHITE">
+            <JFXTextField fx:id="cgpa3Label" focusColor="#583bcd" layoutX="753.0" layoutY="367.0" promptText="12th GPA" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="cgpa2Label" focusColor="#583bcd" layoutX="327.0" layoutY="369.0" promptText="Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" text="10th GPA" unFocusColor="WHITE">
+            <JFXTextField fx:id="cgpa2Label" focusColor="#583bcd" layoutX="327.0" layoutY="369.0" promptText="10th GPA" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="programLabel" focusColor="#583bcd" layoutX="329.0" layoutY="444.0" promptText="Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" text="Program" unFocusColor="WHITE">
+            <JFXTextField fx:id="programLabel" focusColor="#583bcd" layoutX="329.0" layoutY="444.0" promptText="Program" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </JFXTextField>
-            <JFXChipView layoutX="741.0" layoutY="444.0" maxWidth="500.0" minWidth="300.0" prefHeight="78.0" prefWidth="300.0" promptText="Skills" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-font-family: consolas; -fx-font-size: 16;" />
-            <JFXTextField fx:id="passwordLabel" focusColor="#583bcd" layoutX="533.0" layoutY="526.0" promptText="Name" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" text="Password" unFocusColor="WHITE">
+            <JFXTextField fx:id="passwordLabel" focusColor="#583bcd" layoutX="533.0" layoutY="526.0" promptText="Password" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </JFXTextField>
+            <AnchorPane layoutX="753.0" layoutY="495.0" prefHeight="200.0" prefWidth="269.0">
+               <children>
+                  <JFXChipView fx:id="skillChips" layoutX="78.0" layoutY="14.0" prefHeight="195.0" prefWidth="265.0" promptText="Skills" style="-fx-font-size: 25; -fx-text-fill: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
             <JFXButton fx:id="registerButton" buttonType="RAISED" layoutX="623.0" layoutY="610.0" onAction="#registerStudent" prefHeight="47.0" prefWidth="95.0" style="-fx-background-color: #583bcd;" text="Register" textFill="WHITE">
                <font>
                   <Font size="19.0" />
@@ -92,7 +96,19 @@
                   <Font size="19.0" />
                </font>
             </JFXButton>
+            <Label fx:id="notificationLabel" alignment="CENTER" layoutX="487.0" layoutY="29.0" opacity="0.0" prefHeight="26.0" prefWidth="272.0" style="-fx-background-color: #583bcd; -fx-border-color: white;" text="Registered user id: 312" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI" size="17.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </left>
+   <right>
+      <JFXTextField fx:id="phoneLabel" focusColor="#583bcd" promptText="Phone" style="-fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+   </right>
 </BorderPane>

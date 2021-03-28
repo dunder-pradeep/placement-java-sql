@@ -1,12 +1,10 @@
 package placement.Controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -15,7 +13,9 @@ import placement.Database;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class RegisterCompany implements Initializable {
@@ -31,6 +31,10 @@ public class RegisterCompany implements Initializable {
     public JFXTextArea addressLabel;
     public JFXButton loginButton;
     public ToggleGroup btngroup = new ToggleGroup();
+    public JFXTextField phoneLabel;
+    public JFXTextField marketLabel;
+    public JFXDatePicker foundingLabel;
+    public Label notificationLabel;
 
 
     public void registerStudent(ActionEvent actionEvent) {
@@ -46,12 +50,21 @@ public class RegisterCompany implements Initializable {
         String email = emailLabel.getText();
         String address = addressLabel.getText();
         String pwd = passwordLabel.getText();
-
-
+        String phone = passwordLabel.getText();
+        String market = marketLabel.getText();
+        String founded = foundingLabel.getValue().toString();
+        int company_id;
+        System.out.println(founded);
         Connection connection = Database.connectToDB();
         assert connection != null;
-        connection.createStatement().executeUpdate(String.format("INSERT INTO COMPANY VALUES('%s','%s','%s','%s')",name,email,address,pwd));
+        var callableStatement = connection.prepareCall(String.format("call jobportal.create_new_company('%s', '%s', %d, '%s', '%s', '%s', '%s');",name,founded,Integer.parseInt(market),email,phone,address,pwd));
+        ResultSet rs = callableStatement.executeQuery();
+        rs.next();
+        company_id = rs.getInt(1);
+        connection.close();
 
+        notificationLabel.setStyle(notificationLabel.getStyle().concat("-fx-opacity:1;"));
+        notificationLabel.setText("Registered user id: "+company_id);
         connection.close();
     }
 
