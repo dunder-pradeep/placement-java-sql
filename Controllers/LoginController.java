@@ -58,6 +58,15 @@ public class LoginController implements Initializable {
                 if(rs.next()) {
                     App.setAuthUser(true);
                     App.newUser(rs.getInt("student_id"), rs.getString("student_first_name"), rs.getString("student_last_name"), passwordID.getText(), Integer.parseInt(rs.getString("phone")),"", rs.getString("email"), "");
+
+                    rs = statement.executeQuery("SELECT name FROM skills JOIN has_skills WHERE has_skills.student_id = "+App.user.getId());
+                    StringBuilder newString = new StringBuilder();
+                    while(rs.next()) {
+                        newString.append(rs.getString("name")).append(" ");
+                        System.out.println(rs.getString(1));
+                    }
+                    App.user.setSkills(newString.toString());
+
                     Pane pane = FXMLLoader.load(getClass().getResource("../user_info.fxml"));
                     loginpage.getChildren().setAll(pane);
                     return;

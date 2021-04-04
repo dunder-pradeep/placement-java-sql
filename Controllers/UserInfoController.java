@@ -50,7 +50,7 @@ public class UserInfoController implements Initializable {
         skillsLabel.setText(App.user.getSkills());
         phoneLabel.setText(String.valueOf(App.user.getPhone()));
 
-        sqlLabel.setText(String.format("SQL>SELECT * FROM USER WHERE ID=%d",App.user.getId()));
+        sqlLabel.setText(String.format("SQL>SELECT * FROM STUDENT WHERE ID=%d",App.user.getId()));
 
         profilePicture.setClip(new Circle(100,50,50));
     }

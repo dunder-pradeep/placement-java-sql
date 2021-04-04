@@ -33,7 +33,7 @@ public class Database {
 
     public static String makeQuery(String cname,int salary,String skills){
         boolean queryCombine = false;
-        String queryBuild = "SELECT * FROM COMPANY";
+        String queryBuild = "SELECT * FROM jobs";
 
         if(!cname.equals("")){
         queryBuild = queryCombine?queryBuild.concat(String.format(" AND NAME='%s'",cname)):queryBuild.concat(String.format(" WHERE NAME='%s'",cname));
@@ -46,7 +46,7 @@ public class Database {
         }
 
         if(!skills.equals("")){
-            queryBuild = queryCombine?queryBuild.concat(String.format(" AND SKILL LIKE '%s'",skills)):queryBuild.concat(String.format(" WHERE SKILL LIKE '%s'",skills));
+            queryBuild = queryCombine?queryBuild.concat(String.format(" AND SKILLS LIKE '%s'",skills)):queryBuild.concat(String.format(" WHERE SKILLS LIKE '%s'",skills));
             queryCombine = true;
         }
 
@@ -54,7 +54,7 @@ public class Database {
     }
 
     public static String makeUpdateQuery(String insertName,String insertPwd,String insertEmail,int insertPhone,String insertSkills){
-        return String.format("UPDATE USER SET NAME='%s',PWD='%s' ,EMAIL='%s' ,PHONE=%d ,SKILLS='%s' WHERE ID=%d ",insertName,insertPwd,insertEmail,insertPhone,insertSkills,App.user.getId());
+        return String.format("UPDATE STUDENT SET STUDENT_FIRST_NAME='%s',EMAIL='%s' ,PHONE=%d WHERE STUDENT_ID=%d ",insertName,insertEmail,insertPhone,App.user.getId());
     }
 
 
