@@ -95,7 +95,7 @@ public class User{
         this.jfxCheckBox = jfxCheckBox;
     }
 
-    public Object getId() {
+    public int getId() {
         return this.id;
     }
 }

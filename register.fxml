@@ -16,7 +16,7 @@
          <children>
             <Label layoutX="320.0" layoutY="112.0" text="Register" textFill="#583bcd">
                <font>
-                  <Font name="Consolas Bold" size="42.0" />
+                  <Font name="Leelawadee UI Bold" size="42.0" />
                </font>
             </Label>
             <JFXRadioButton fx:id="companyToggle" layoutX="861.0" layoutY="117.0" onMouseClicked="#redirectCompany" text="Company" textFill="WHITE">

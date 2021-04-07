@@ -20,16 +20,20 @@ public class Job extends RecursiveTreeObject<Job> {
       public StringProperty jobSalary;
       public StringProperty jobSkills;
       public StringProperty jobDate;
+      public StringProperty jobDesc;
+      public StringProperty jobcompID;
       public ObservableValue<JFXCheckBox> jfxCheckBox;
       public boolean jobApply;
 
-    public Job(String Name,String title,int salary,String skills,String date){
-            this.jobId = new SimpleStringProperty("1");
+    public Job(String Name,String title,int salary,String skills,String date,String desc,String compid,String jobid){
+            this.jobId = new SimpleStringProperty(jobid);
             this.jobName = new SimpleStringProperty(Name);
             this.jobTitle = new SimpleStringProperty(title);
-            this.jobSalary = new SimpleStringProperty(String.valueOf(salary));
+            this.jobSalary = new SimpleStringProperty("$"+String.valueOf(salary));
             this.jobSkills = new SimpleStringProperty(skills);
             this.jobDate = new SimpleStringProperty(date);
+            this.jobDesc = new SimpleStringProperty(desc);
+            this.jobcompID = new SimpleStringProperty(compid);
             JFXCheckBox tempBox = new JFXCheckBox();
 
             tempBox.setOnAction(e->this.invertStatus());

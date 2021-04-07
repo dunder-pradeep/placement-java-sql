@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
                     }
                     App.user.setSkills(newString.toString());
 
-                    Pane pane = FXMLLoader.load(getClass().getResource("../user_info.fxml"));
+                    Pane pane = FXMLLoader.load(getClass().getResource("../user.fxml"));
                     loginpage.getChildren().setAll(pane);
                     return;
                 }

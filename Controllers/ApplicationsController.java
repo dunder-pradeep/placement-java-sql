@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -39,6 +40,7 @@ public class ApplicationsController implements Initializable {
     public JFXTextField programLabel;
     public JFXTextField cgpaLabel;
     public JFXTextField qualificationLabel;
+    public JFXButton logoutButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,7 +54,7 @@ public class ApplicationsController implements Initializable {
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
                 while (rs.next()) {
-                    applications.add(new Application(rs.getInt("id"), rs.getString("name"), rs.getString("gender"), rs.getInt("age"), rs.getString("program"), rs.getString("title"), rs.getString("email"), rs.getString("qualification")));
+                    applications.add(new Application(rs.getInt("student_id"), rs.getString("name"), rs.getString("gender"), rs.getInt("age"), rs.getString("program"), rs.getString("title"), rs.getString("email"), rs.getString("qualification")));
                 }
 
                 TreeItem<Application> root = new TreeItem<>(new Application(0,"","",0,"","","",""));
@@ -73,7 +75,7 @@ public class ApplicationsController implements Initializable {
 
 
     public void redirectToPost(MouseEvent mouseEvent) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource("../company.fxml"));
+        Pane pane = FXMLLoader.load(getClass().getResource("../companyPosts.fxml"));
         applicationPage.getChildren().setAll(pane);
     }
     public void treeviewInitialize(){
@@ -190,5 +192,11 @@ public class ApplicationsController implements Initializable {
         {
             e.printStackTrace();
         }
+    }
+
+    public void logoutCompany(ActionEvent actionEvent) throws IOException, InterruptedException {
+        App.company = null;
+        App.setAuthCompany(false);
+        applicationPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../login.fxml")));
     }
 }

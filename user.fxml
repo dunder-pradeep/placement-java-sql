@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXRadioButton?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleButton?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -31,7 +27,7 @@
                </font>
             </Label>
             <JFXToggleButton layoutX="14.0" layoutY="566.0" text="Enable SSH" textFill="WHITE" />
-            <JFXButton fx:id="viewposts" layoutX="57.0" layoutY="381.0" onMouseClicked="#displayposts" text="View posts" textFill="WHITE">
+            <JFXButton fx:id="viewposts" layoutX="57.0" layoutY="381.0" onMouseClicked="#renderView" text="View posts" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI" size="14.0" />
                </font>
@@ -52,48 +48,13 @@
          </BorderPane.margin></Pane>
    </left>
    <center>
-      <AnchorPane fx:id="parentmiddle" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="866.0" style="-fx-background-color: #2d2f33;">
-         <JFXTreeTableView fx:id="viewTable" layoutX="55.0" layoutY="68.0" prefHeight="542.0" prefWidth="680.0" scaleShape="false" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-background-color: #27282c; -fx-border-color: white;" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="68.0">
-            <columnResizePolicy>
-               <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-            </columnResizePolicy></JFXTreeTableView>
-         
-      </AnchorPane>
+      <AnchorPane fx:id="parentmiddle" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="866.0" style="-fx-background-color: #2d2f33;" />
    </center>
    <right>
-      <Pane fx:id="rightpane" onMouseClicked="#rightpaneMouseclick" prefHeight="678.0" prefWidth="270.0" style="-fx-background-color: #583bcd; -fx-border-color: #583bcd; -fx-border-width: 2;" BorderPane.alignment="CENTER">
-         <Label layoutX="85.0" layoutY="67.0" text="Filters" textFill="WHITE">
-            <font>
-               <Font name="Leelawadee UI" size="32.0" />
-            </font>
-         </Label>
-         <Label layoutX="19.0" layoutY="160.0" text="Preference :" textFill="WHITE">
-            <font>
-               <Font name="Leelawadee UI" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="57.0" layoutY="226.0" text="Salary :" textFill="WHITE">
-            <font>
-               <Font name="Leelawadee UI" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="61.0" layoutY="296.0" text="Skills :" textFill="WHITE">
-            <font>
-               <Font name="Leelawadee UI" size="18.0" />
-            </font>
-         </Label>
-         <JFXTextField fx:id="salaryText" layoutX="127.0" layoutY="227.0" style="-fx-text-fill: white;" unFocusColor="WHITE" />
-         <JFXRadioButton layoutX="53.0" layoutY="356.0" text="Java" textFill="WHITE">
-            <font>
-               <Font name="Leelawadee UI" size="13.0" />
-            </font>
-         </JFXRadioButton>
-         <JFXButton fx:id="applyfilterButton" layoutX="99.0" layoutY="517.0" onMouseClicked="#applyFilter" text="Apply FIlter" textFill="WHITE">
-            <font>
-               <Font name="Leelawadee UI" size="13.0" />
-            </font>
-         </JFXButton>
-         <JFXTextField fx:id="filterPreference" layoutX="127.0" layoutY="161.0" style="-fx-text-fill: white;" unFocusColor="WHITE" />
+      <Pane fx:id="rightpane" onMouseClicked="#rightpaneMouseclick" prefHeight="678.0" prefWidth="270.0" style="-fx-background-color: #2d2f33;" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </Pane>
    </right>
    <bottom>
