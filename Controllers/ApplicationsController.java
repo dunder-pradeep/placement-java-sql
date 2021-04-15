@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseEvent;
@@ -22,10 +23,9 @@ import placement.Job;
 import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ApplicationsController implements Initializable {
@@ -41,23 +41,46 @@ public class ApplicationsController implements Initializable {
     public JFXTextField cgpaLabel;
     public JFXTextField qualificationLabel;
     public JFXButton logoutButton;
+    public Label idLabel;
+    public Label nameLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        nameLabel.setText(App.company.companyName);
+        idLabel.setText("ID : "+App.company.companyId);
             treeviewInitialize();
+            List<Job> jobList = new ArrayList<>();
+            List<Integer> studentID = new ArrayList<>();
             Connection connection = Database.connectToDB();
 
-            String query = "SELECT * FROM APPLICATION";
+            String query = String.format("SELECT * FROM JOBS WHERE COMPANY_ID = %s",App.company.companyId);
+            App.sqlCommands.add(query);
             try {
 
                 assert connection != null;
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
                 while (rs.next()) {
-                    applications.add(new Application(rs.getInt("student_id"), rs.getString("name"), rs.getString("gender"), rs.getInt("age"), rs.getString("program"), rs.getString("title"), rs.getString("email"), rs.getString("qualification")));
+                    //applications.add(new Application(rs.getInt("student_id"), rs.getString("name"), rs.getString("gender"), rs.getInt("age"), rs.getString("program"), rs.getString("title"), rs.getString("email"), rs.getString("qualification")));
+                    jobList.add(new Job(App.company.companyName,rs.getString("position"),rs.getInt("salary"),"","",rs.getString("description"),App.company.companyId,rs.getString("job_id")));
+                }
+                for(Job job:jobList){
+                    rs = statement.executeQuery(String.format("SELECT STUDENT_ID FROM APPLICATION WHERE JOB_ID = %s",job.jobId.getValue()));
+                    App.sqlCommands.add(String.format("SELECT STUDENT_ID FROM APPLICATION WHERE JOB_ID = %s",job.jobId.getValue()));
+                    while (rs.next()){
+                        studentID.add(rs.getInt("student_id"));
+                    }
+                    for(Integer sid:studentID){
+                        rs = statement.executeQuery(String.format("SELECT * FROM STUDENT WHERE STUDENT_ID = %d",sid));
+                        App.sqlCommands.add(String.format("SELECT * FROM STUDENT WHERE STUDENT_ID = %d",sid));
+                        while (rs.next()){
+                            applications.add(new Application(Integer.parseInt(job.jobId.getValue()),rs.getString("student_first_name")+rs.getString("student_last_name"),job.jobDesc.getValue(),rs.getInt("age"),rs.getString("program"),job.jobTitle.getValue(),rs.getString("email"),rs.getString("program"),rs.getDouble("cgpa")));
+                        }
+                    }
+                    studentID.clear();
                 }
 
-                TreeItem<Application> root = new TreeItem<>(new Application(0,"","",0,"","","",""));
+                TreeItem<Application> root = new TreeItem<>(new Application(0,"","",0,"","","","",0.0));
 
                 for(int i=0;i<applications.size();i++)
                     root.getChildren().add(i,new TreeItem<Application>(applications.get(i)));
@@ -79,49 +102,40 @@ public class ApplicationsController implements Initializable {
         applicationPage.getChildren().setAll(pane);
     }
     public void treeviewInitialize(){
-        String styling = "-fx-background-color:#27282c;-fx-text-fill:white;";
+        String styling = "-fx-background-color:#27282c;-fx-text-fill:white;-fx-alignment:Center;";
 
-        JFXTreeTableColumn<Application,String> colId= new JFXTreeTableColumn<>("App.no.");
-        colId.setPrefWidth(116.0);
-        colId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Application, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Application, String> jobStringCellDataFeatures) {
-                return jobStringCellDataFeatures.getValue().getValue().applicationId;
-            }
-        });
-        colId.setStyle(styling);
 
-        JFXTreeTableColumn<Application,String> colName= new JFXTreeTableColumn<>("Name");
+        JFXTreeTableColumn<Application,String> colName= new JFXTreeTableColumn<>("Position");
         colName.setPrefWidth(116.0);
         colName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Application, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Application, String> jobStringCellDataFeatures) {
+                return jobStringCellDataFeatures.getValue().getValue().position;
+            }
+        });
+        colName.setStyle(styling);
+
+        JFXTreeTableColumn<Application,String> colGender= new JFXTreeTableColumn<>("Description");
+        colGender.setPrefWidth(116.0);
+        colGender.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Application, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Application, String> jobStringCellDataFeatures) {
+                return jobStringCellDataFeatures.getValue().getValue().desc;
+            }
+        });
+        colGender.setStyle(styling);
+
+        JFXTreeTableColumn<Application,String> colAge= new JFXTreeTableColumn<>("Candidate Name");
+        colAge.setPrefWidth(116.0);
+        colAge.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Application, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Application, String> jobStringCellDataFeatures) {
                 return jobStringCellDataFeatures.getValue().getValue().name;
             }
         });
-        colName.setStyle(styling);
-
-        JFXTreeTableColumn<Application,String> colGender= new JFXTreeTableColumn<>("Gender");
-        colGender.setPrefWidth(116.0);
-        colGender.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Application, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Application, String> jobStringCellDataFeatures) {
-                return jobStringCellDataFeatures.getValue().getValue().gender;
-            }
-        });
-        colGender.setStyle(styling);
-
-        JFXTreeTableColumn<Application,String> colAge= new JFXTreeTableColumn<>("Age");
-        colAge.setPrefWidth(116.0);
-        colAge.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Application, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Application, String> jobStringCellDataFeatures) {
-                return jobStringCellDataFeatures.getValue().getValue().age;
-            }
-        });
         colAge.setStyle(styling);
 
-        JFXTreeTableColumn<Application,String> colProgram= new JFXTreeTableColumn<>("Program");
+        JFXTreeTableColumn<Application,String> colProgram= new JFXTreeTableColumn<>("Qualification");
         colProgram.setPrefWidth(116.0);
         colProgram.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Application, String>, ObservableValue<String>>() {
             @Override
@@ -131,12 +145,12 @@ public class ApplicationsController implements Initializable {
         });
         colProgram.setStyle(styling);
 
-        JFXTreeTableColumn<Application,String> colTitle= new JFXTreeTableColumn<>("Job Title");
+        JFXTreeTableColumn<Application,String> colTitle= new JFXTreeTableColumn<>("Age");
         colTitle.setPrefWidth(116.0);
         colTitle.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Application, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Application, String> jobStringCellDataFeatures) {
-                return jobStringCellDataFeatures.getValue().getValue().jobTitle;
+                return jobStringCellDataFeatures.getValue().getValue().age;
             }
         });
         colTitle.setStyle(styling);
@@ -151,17 +165,18 @@ public class ApplicationsController implements Initializable {
         });
         colEmail.setStyle(styling);
 
-        JFXTreeTableColumn<Application,String> colQualification= new JFXTreeTableColumn<>("Qualification");
-        colQualification.setPrefWidth(135.0);
-        colQualification.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Application, String>, ObservableValue<String>>() {
+        JFXTreeTableColumn<Application,String> colcgpa= new JFXTreeTableColumn<>("Grade");
+        colcgpa.setPrefWidth(116.0);
+        colcgpa.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Application, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Application, String> jobStringCellDataFeatures) {
-                return jobStringCellDataFeatures.getValue().getValue().qualification;
+                return jobStringCellDataFeatures.getValue().getValue().cgpa;
             }
         });
-        colQualification.setStyle(styling);
+        colcgpa.setStyle(styling);
 
-        applicationTable.getColumns().setAll(colId,colName,colGender,colAge,colProgram,colTitle,colEmail,colQualification);
+
+        applicationTable.getColumns().setAll(colName,colGender,colAge,colProgram,colTitle,colEmail,colcgpa);
     }
 
     public void applyfilter(MouseEvent mouseEvent) {
@@ -175,10 +190,10 @@ public class ApplicationsController implements Initializable {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
-                applications.add(new Application(rs.getInt("id"), rs.getString("name"), rs.getString("gender"), rs.getInt("age"), rs.getString("program"), rs.getString("title"), rs.getString("email"), rs.getString("qualification")));
+                //applications.add(new Application(rs.getInt("id"), rs.getString("name"), rs.getString("gender"), rs.getInt("age"), rs.getString("program"), rs.getString("title"), rs.getString("email"), rs.getString("qualification")));
             }
 
-            TreeItem<Application> root = new TreeItem<>(new Application(0,"","",0,"","","",""));
+            TreeItem<Application> root = new TreeItem<>(new Application(0,"","",0,"","","","",0.0));
 
             for(int i=0;i<applications.size();i++)
                 root.getChildren().add(i,new TreeItem<Application>(applications.get(i)));

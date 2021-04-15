@@ -12,6 +12,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import placement.App;
 import placement.Database;
 
 import javax.swing.plaf.basic.BasicBorders;
@@ -55,6 +56,7 @@ public class RegisterStudent implements Initializable {
         Connection connection = Database.connectToDB();
         assert connection != null;
         var callableStatement = connection.prepareCall(String.format("call jobportal.register_student('%s', '%s', %d, %d, '%s', %d, %d, %d, '%s', '%s');",name,"",Integer.parseInt(age),phone,program,cgpa,cgpa10,cgpa12,email,pwd));
+        App.sqlCommands.add(String.format("call jobportal.register_student('%s', '%s', %d, %d, '%s', %d, %d, %d, '%s', '%s');",name,"",Integer.parseInt(age),phone,program,cgpa,cgpa10,cgpa12,email,pwd));
         ResultSet rs = callableStatement.executeQuery();
         if(rs.next())
             student_account_id = rs.getInt(1);

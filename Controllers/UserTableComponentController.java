@@ -146,6 +146,7 @@ public class UserTableComponentController implements Initializable {
         viewTableInitialize();
         try {
             initializePosts();
+            sqlQueryLabel.setText("SELECT * FROM JOBS");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

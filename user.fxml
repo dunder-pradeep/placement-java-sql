@@ -14,7 +14,7 @@
 
 <BorderPane fx:id="userpage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="placement.Controllers.UserController">
    <left>
-      <Pane fx:id="leftpane" onMouseClicked="#leftpaneMouseclick" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #583bcd; -fx-border-color: #583bcd; -fx-border-width: 2;" BorderPane.alignment="CENTER">
+      <Pane fx:id="leftpane" onMouseClicked="#leftpaneMouseclick" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #583bcd; -fx-border-width: 2;" BorderPane.alignment="CENTER">
          <children>
             <JFXButton fx:id="infoPage" layoutX="55.0" layoutY="332.0" onMouseClicked="#redirectToInfo" text="Update info" textFill="WHITE">
                <font>

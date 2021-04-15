@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import placement.App;
 import placement.Database;
 
 import java.io.IOException;
@@ -58,6 +59,7 @@ public class RegisterCompany implements Initializable {
         Connection connection = Database.connectToDB();
         assert connection != null;
         var callableStatement = connection.prepareCall(String.format("call jobportal.create_new_company('%s', '%s', %d, '%s', '%s', '%s', '%s');",name,founded,Integer.parseInt(market),email,phone,address,pwd));
+        App.sqlCommands.add(String.format("call jobportal.create_new_company('%s', '%s', %d, '%s', '%s', '%s', '%s');",name,founded,Integer.parseInt(market),email,phone,address,pwd));
         ResultSet rs = callableStatement.executeQuery();
         rs.next();
         company_id = rs.getInt(1);

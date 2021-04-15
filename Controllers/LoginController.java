@@ -3,6 +3,7 @@ package placement.Controllers;
 import com.gluonhq.charm.glisten.control.ToggleButtonGroup;
 import com.jfoenix.controls.JFXAutoCompletePopup;
 import com.jfoenix.controls.JFXRadioButton;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import placement.Database;
 import placement.App;
+import placement.Toast;
 import placement.User;
 
 import javax.swing.plaf.nimbus.State;
@@ -38,7 +40,7 @@ public class LoginController implements Initializable {
         JFXRadioButton selectedToggle = (JFXRadioButton) toggleGroup.getSelectedToggle();
         String UserID = userID.getText();
         String PasswordID =  passwordID.getText();
-        int type = selectedToggle==toggleStudent?0:selectedToggle==toggleCompany?1:2;
+        int type = selectedToggle==toggleStudent?0:selectedToggle==toggleCompany?1:selectedToggle==toggleAdmin?2:2;
 
         String SQL;
         ResultSet rs;
@@ -54,16 +56,16 @@ public class LoginController implements Initializable {
             if(type==0){
                 //student login
                 SQL = String.format("SELECT * FROM STUDENT WHERE ACCOUNT_ID=%d",Integer.parseInt(userID.getText()));
+                App.sqlCommands.add(SQL);
                 rs = statement.executeQuery(SQL);
                 if(rs.next()) {
                     App.setAuthUser(true);
                     App.newUser(rs.getInt("student_id"), rs.getString("student_first_name"), rs.getString("student_last_name"), passwordID.getText(), Integer.parseInt(rs.getString("phone")),"", rs.getString("email"), "");
 
-                    rs = statement.executeQuery("SELECT name FROM skills JOIN has_skills WHERE has_skills.student_id = "+App.user.getId());
+                    rs = statement.executeQuery("SELECT name FROM skills JOIN has_skills ON skills.skill_id = has_skills.skill_id where student_id = "+App.user.getId());
                     StringBuilder newString = new StringBuilder();
                     while(rs.next()) {
                         newString.append(rs.getString("name")).append(" ");
-                        System.out.println(rs.getString(1));
                     }
                     App.user.setSkills(newString.toString());
 
@@ -78,6 +80,7 @@ public class LoginController implements Initializable {
             else if (type==1){
                 //company login
                 SQL = String.format("SELECT * FROM COMPANY WHERE ACCOUNT_ID=%d",Integer.parseInt(userID.getText()));
+                App.sqlCommands.add(SQL);
                 rs = statement.executeQuery(SQL);
                 if(rs.next()){
                 App.setAuthCompany(true);
@@ -90,11 +93,22 @@ public class LoginController implements Initializable {
                 }
             }
             else {
-                System.out.println("admin not yet created");
+                //admin login
+                    Pane pane = FXMLLoader.load(getClass().getResource("../admin.fxml"));
+                    loginpage.getChildren().setAll(pane);
+                    return;
+
             }
         }
-
+        else {
+            String toastMsg = "Invalid credentials";
+            int toastMsgTime = 1000; //3.5 seconds
+            int fadeInTime = 500; //0.5 seconds
+            int fadeOutTime= 250; //0.5 seconds
+            Toast.makeText(App.pstage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
+        }
         connection.close();
+        App.sqlCommands.add("Connection closed!");
     }
 
     @Override

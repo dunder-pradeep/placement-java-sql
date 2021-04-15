@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import org.kordamp.bootstrapfx.scene.layout.Panel;
 
+import java.util.ArrayList;
+
 @SuppressWarnings("unchecked")
 public class App extends Application {
     public static boolean isAuthUser = false;
@@ -19,7 +21,8 @@ public class App extends Application {
     public static User user=new User(0,"","","",0,"","","");
     public static Admin admin=new Admin("","");
     public static Company company;
-
+    public static ArrayList<String> sqlCommands = new ArrayList<>();
+    public static Stage pstage;
     @Override
     public void start(Stage primaryStage) throws Exception {                   //(1)
 
@@ -28,7 +31,7 @@ public class App extends Application {
 
 
         //bootstrap config ends..
-
+        pstage = primaryStage;
 
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(root,1280,720);

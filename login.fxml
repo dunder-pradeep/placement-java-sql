@@ -36,27 +36,32 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <!--suppress ALL -->
 
 <Pane fx:id="loginpage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #27282c;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="placement.Controllers.LoginController">
    <children>
-      <JFXRadioButton fx:id="toggleStudent" layoutX="49.0" layoutY="461.0" text="Student" textFill="WHITE">
+      <JFXRadioButton fx:id="toggleStudent" layoutX="1011.0" layoutY="440.0" text="Student" textFill="WHITE">
          <font>
             <Font name="Leelawadee UI" size="20.0" />
          </font>
       </JFXRadioButton>
-      <JFXRadioButton fx:id="toggleAdmin" layoutX="42.0" layoutY="305.0" text="Admin" textFill="WHITE">
+      <JFXRadioButton fx:id="toggleAdmin" layoutX="1011.0" layoutY="285.0" text="Admin" textFill="WHITE">
          <font>
             <Font name="Leelawadee UI" size="20.0" />
          </font>
       </JFXRadioButton>
-      <JFXRadioButton fx:id="toggleCompany" layoutX="42.0" layoutY="378.0" text="Company" textFill="WHITE">
+      <JFXRadioButton fx:id="toggleCompany" layoutX="1011.0" layoutY="355.0" text="Company" textFill="WHITE">
          <font>
             <Font name="Leelawadee UI" size="20.0" />
          </font>
@@ -84,7 +89,10 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="userID" focusColor="#583bcd" layoutX="617.0" layoutY="308.0" promptText="Enter your user id" style="-fx-text-fill: white;" />
+      <JFXTextField fx:id="userID" focusColor="#583bcd" layoutX="617.0" layoutY="308.0" promptText="Enter your user id" style="-fx-text-fill: white;">
+         <tooltip>
+            <Tooltip text="Enter an id" />
+         </tooltip></JFXTextField>
       <JFXPasswordField fx:id="passwordID" focusColor="#583bcd" layoutX="617.0" layoutY="393.0" promptText="Enter a Password" style="-fx-text-fill: white;" />
       <JFXCheckBox layoutX="545.0" layoutY="476.0" text="Remember me" textFill="WHITE">
          <font>
@@ -99,5 +107,14 @@
             <Bloom threshold="1.0" />
          </effect>
       </Button>
+      <ImageView fitHeight="94.0" fitWidth="89.0" layoutX="142.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="NONE" />
+         </cursor>
+      </ImageView>
+      <Circle fill="#1f93ff00" layoutX="187.0" layoutY="365.0" radius="48.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
    </children>
 </Pane>
