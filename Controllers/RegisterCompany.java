@@ -42,7 +42,7 @@ public class RegisterCompany implements Initializable {
     }
 
     public void redirectLogin(ActionEvent actionEvent) throws IOException {
-        registerPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../login.fxml")));
+        registerPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../ui/login.fxml")));
 
     }
 
@@ -78,7 +78,7 @@ public class RegisterCompany implements Initializable {
     }
 
     public void redirectStudent(ActionEvent actionEvent) throws IOException {
-        registerPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../register.fxml")));
+        registerPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../ui/register.fxml")));
 
     }
 }

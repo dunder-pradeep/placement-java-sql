@@ -69,7 +69,7 @@ public class LoginController implements Initializable {
                     }
                     App.user.setSkills(newString.toString());
 
-                    Pane pane = FXMLLoader.load(getClass().getResource("../user.fxml"));
+                    Pane pane = FXMLLoader.load(getClass().getResource("../ui/user.fxml"));
                     loginpage.getChildren().setAll(pane);
                     return;
                 }
@@ -85,7 +85,7 @@ public class LoginController implements Initializable {
                 if(rs.next()){
                 App.setAuthCompany(true);
                 App.newCompany(rs.getString("company_name"), rs.getString("company_id"),"laterb","");
-                Pane pane = FXMLLoader.load(getClass().getResource("../companyPosts.fxml"));
+                Pane pane = FXMLLoader.load(getClass().getResource("../ui/companyPosts.fxml"));
                 loginpage.getChildren().setAll(pane);
                 return;}
                 else {
@@ -94,7 +94,7 @@ public class LoginController implements Initializable {
             }
             else {
                 //admin login
-                    Pane pane = FXMLLoader.load(getClass().getResource("../admin.fxml"));
+                    Pane pane = FXMLLoader.load(getClass().getResource("../ui/admin.fxml"));
                     loginpage.getChildren().setAll(pane);
                     return;
 
@@ -121,6 +121,6 @@ public class LoginController implements Initializable {
         }
 
     public void redirectRegister(ActionEvent actionEvent) throws IOException {
-        loginpage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../register.fxml")));
+        loginpage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../ui/register.fxml")));
     }
 }

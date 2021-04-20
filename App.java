@@ -33,7 +33,7 @@ public class App extends Application {
         //bootstrap config ends..
         pstage = primaryStage;
 
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ui/login.fxml"));
         Scene scene = new Scene(root,1280,720);
         //scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());       //(3)
         primaryStage.setTitle("Placements");

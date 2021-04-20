@@ -40,7 +40,7 @@ public class PostController implements Initializable {
     }
 
     public void redirectToApplications(MouseEvent mouseEvent) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource("../companyApplication.fxml"));
+        Pane pane = FXMLLoader.load(getClass().getResource("../ui/companyApplication.fxml"));
         companyPage.getChildren().setAll(pane);
 
     }
@@ -91,7 +91,7 @@ public class PostController implements Initializable {
     public void logoutCompany(ActionEvent actionEvent) throws IOException {
         App.company = null;
         App.setAuthCompany(false);
-        companyPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../login.fxml")));
+        companyPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../ui/login.fxml")));
     }
 
     public void postOffer(ActionEvent actionEvent) {

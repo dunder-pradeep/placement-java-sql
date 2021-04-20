@@ -104,7 +104,7 @@ public class ApplicationsController implements Initializable {
 
 
     public void redirectToPost(MouseEvent mouseEvent) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource("../companyPosts.fxml"));
+        Pane pane = FXMLLoader.load(getClass().getResource("../ui/companyPosts.fxml"));
         applicationPage.getChildren().setAll(pane);
     }
     public void treeviewInitialize(){
@@ -240,6 +240,6 @@ public class ApplicationsController implements Initializable {
     public void logoutCompany(ActionEvent actionEvent) throws IOException, InterruptedException {
         App.company = null;
         App.setAuthCompany(false);
-        applicationPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../login.fxml")));
+        applicationPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../ui/login.fxml")));
     }
 }

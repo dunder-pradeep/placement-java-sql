@@ -89,7 +89,7 @@ public class RegisterStudent implements Initializable {
     }
 
     public void redirectLogin(ActionEvent actionEvent) throws IOException {
-        registerPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../login.fxml")));
+        registerPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../ui/login.fxml")));
     }
 
     @Override
@@ -101,6 +101,6 @@ public class RegisterStudent implements Initializable {
     }
 
     public void redirectCompany(MouseEvent mouseEvent) throws IOException {
-        registerPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../registercompany.fxml")));
+        registerPage.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../ui/registercompany.fxml")));
     }
 }

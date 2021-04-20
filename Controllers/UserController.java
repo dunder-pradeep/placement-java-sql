@@ -62,7 +62,7 @@ public class UserController implements Initializable {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../user_info_component.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("../ui/user_info_component.fxml"));
         Pane temp = null;
         try {
             temp = fxmlLoader.load();
@@ -101,7 +101,7 @@ public class UserController implements Initializable {
         //Pane temp = FXMLLoader.load(getClass().getResource("../user_info.fxml"));
         //userpage.getChildren().setAll(temp);
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../user_info_component.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("../ui/user_info_component.fxml"));
         Pane temp = fxmlLoader.load();
         UserInfoComponentController c = (UserInfoComponentController) fxmlLoader.getController();
         c.sqlQueryLabel = sqlQueryLabel;
@@ -128,21 +128,21 @@ public class UserController implements Initializable {
     public void logoutUser(ActionEvent actionEvent) throws IOException {
         App.user = null;
         App.setAuthUser(false);
-        userpage.getChildren().setAll((Pane)FXMLLoader.load(getClass().getResource("../login.fxml")));
+        userpage.getChildren().setAll((Pane)FXMLLoader.load(getClass().getResource("../ui/login.fxml")));
 
     }
 
     public void renderView(MouseEvent mouseEvent) throws SQLException, IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
 
-        fxmlLoader.setLocation(getClass().getResource("../student_table_component.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("../ui/student_table_component.fxml"));
         Pane temp = fxmlLoader.load();
         tableComponentController = (UserTableComponentController)fxmlLoader.getController();
         tableComponentController.sqlQueryLabel = sqlQueryLabel;
         parentmiddle.getChildren().setAll(temp);
 
         fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../filter_component.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("../ui/filter_component.fxml"));
         Pane temp2 = fxmlLoader.load();
         UserFilterComponentController userFilterComponentController = (UserFilterComponentController)fxmlLoader.getController();
         userFilterComponentController.sqlQueryLabel = sqlQueryLabel;

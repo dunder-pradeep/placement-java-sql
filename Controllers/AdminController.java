@@ -16,12 +16,12 @@ public class AdminController {
     public JFXButton executeButton;
 
     public void logoutAdmin(ActionEvent actionEvent) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource("../login.fxml"));
+        Pane pane = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
         adminPage.getChildren().setAll(pane);
     }
 
     public void showSQLcli(MouseEvent mouseEvent) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource("../admin_sql_component.fxml"));
+        Pane pane = FXMLLoader.load(getClass().getResource("../ui/admin_sql_component.fxml"));
         renderPage.getChildren().setAll(pane);
     }
 }
