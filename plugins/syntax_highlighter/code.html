@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <script src="src-noconflict/ace.js"></script>
+    <title>ACE in Action</title>
+    <style type="text/css" media="screen">
+      #editor {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body style="overflow-x: hidden; overflow-y: hidden">
+    <div id="editor">
+    </div>
+    <script>
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/vibrant_ink");
+      editor.session.setMode("ace/mode/sql");
+      editor.setReadOnly(true);
+      editor.setShowPrintMargin(false);
+      editor.renderer.setShowGutter(false);
+    </script>
+  </body>
+</html>
