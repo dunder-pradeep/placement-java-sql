@@ -69,7 +69,7 @@ public class Database {
 
     public static String buildQueryApplications(String qualification,String gender,String program){
         boolean queryCombine = false;
-        String queryBuild = "SELECT * FROM APPLICATION";
+        String queryBuild = String.format("SELECT * FROM JOBS WHERE COMPANY_ID = %s",App.company.companyId);
 
         if(!qualification.equals("")){
             queryBuild = queryCombine?queryBuild.concat(String.format(" AND QUALIFICATION='%s'",qualification)):queryBuild.concat(String.format(" WHERE QUALIFICATION='%s'",qualification));
